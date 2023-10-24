@@ -32,9 +32,11 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: TextButton(
-        onPressed: () {
+        onPressed: () async {
           final CharacterService service = GetIt.I.get();
-          service.getCharacteres();
+          final response = await service.getCharacteres();
+
+          print('RESPONSE::: $response');
         },
         child: const Text(
           'Teste botão',
