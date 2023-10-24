@@ -1,9 +1,11 @@
 import 'package:estudo_rick_xp_flutter/characters/data/service/character_service.dart';
+import 'package:estudo_rick_xp_flutter/injection.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
-import 'package:http/http.dart' as http;
-
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
   runApp(const MyApp());
 }
 
@@ -31,7 +33,7 @@ class MyHomePage extends StatelessWidget {
     return Center(
       child: TextButton(
         onPressed: () {
-          final CharacterService service = CharacterServiceImp(http.Client());
+          final CharacterService service = GetIt.I.get();
           service.getCharacteres();
         },
         child: const Text(
