@@ -35,8 +35,9 @@ class MyHomePage extends StatelessWidget {
         onPressed: () async {
           final CharacterService service = GetIt.I.get();
           final response = await service.getCharacteres();
+          final test = "test";
 
-          print('RESPONSE::: $response');
+          print(test);
         },
         child: const Text(
           'Teste botão',

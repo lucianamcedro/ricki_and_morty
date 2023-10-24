@@ -1,12 +1,14 @@
 import 'package:equatable/equatable.dart';
 
 class CharacterResponse extends Equatable {
-  final int id;
-  final String name;
-  final String status;
-  final String species;
-  final String type;
-  final String image;
+  const CharacterResponse(
+    this.id,
+    this.name,
+    this.status,
+    this.species,
+    this.type,
+    this.image,
+  );
 
   factory CharacterResponse.fromJson(Map<String, dynamic> json) =>
       CharacterResponse(
@@ -17,15 +19,12 @@ class CharacterResponse extends Equatable {
         json['type'] as String,
         json['image'] as String,
       );
-
-  CharacterResponse(
-    this.id,
-    this.name,
-    this.status,
-    this.species,
-    this.type,
-    this.image,
-  );
+  final int id;
+  final String name;
+  final String status;
+  final String species;
+  final String type;
+  final String image;
 
   @override
   List<Object> get props => [id, name, status, species, type, image];
