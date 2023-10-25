@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:estudo_rick_xp_flutter/home/presentation/page/home_page.dart';
 import 'package:estudo_rick_xp_flutter/injection.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,13 @@ import 'package:flutter/material.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
-  runApp(const RickAndMortyApp());
+  runApp(
+    DevicePreview(
+      builder: (_) {
+        return const RickAndMortyApp();
+      },
+    ),
+  );
 }
 
 class RickAndMortyApp extends StatelessWidget {
