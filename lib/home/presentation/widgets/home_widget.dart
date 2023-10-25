@@ -1,3 +1,4 @@
+import 'package:estudo_rick_xp_flutter/characters/presentation/page/character_page.dart';
 import 'package:estudo_rick_xp_flutter/home/presentation/cubit/navigation_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,9 +7,7 @@ class HomeWidget extends StatelessWidget {
   HomeWidget({super.key});
 
   final _pages = {
-    const Center(
-      child: Text('Characters Page'),
-    ): const BottomNavigationBarItem(
+    const CharacterPage(): const BottomNavigationBarItem(
       icon: Icon(Icons.person),
       label: 'Characters',
     ),
