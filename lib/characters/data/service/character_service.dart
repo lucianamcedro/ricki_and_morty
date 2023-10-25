@@ -22,6 +22,9 @@ class CharacterServiceImp implements CharacterService {
         'page': '$page',
       },
     );
+
+    await Future.delayed(const Duration(seconds: 2));
+
     if (response.statusCode == 200) {
       return CharacterApiResponse.fromJson(response.data);
     }

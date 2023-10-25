@@ -1,4 +1,6 @@
 import 'package:estudo_rick_xp_flutter/characters/presentation/bloc/character_bloc.dart';
+import 'package:estudo_rick_xp_flutter/characters/presentation/widgets/character_card_widget.dart';
+import 'package:estudo_rick_xp_flutter/shared/widgets/default_loading_widget.dart';
 import 'package:estudo_rick_xp_flutter/shared/widgets/default_try_again_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,10 +38,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
             if (state.result == ResultState.initial ||
                 state.result == ResultState.loading && state.isFirstPage) ...{
               const Center(
-                child: SizedBox(
-                  height: 100,
-                  child: CircularProgressIndicator(),
-                ),
+                child: DefaultLoadingWidget(),
               ),
             } else if (state.result == ResultState.error &&
                 state.isFirstPage) ...{
@@ -54,19 +53,16 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                 controller: _scrollController,
                 itemBuilder: (context, index) {
                   if (index < state.characters.length) {
-                    return SizedBox(
-                      height: 200,
-                      child: Text(state.characters[index].name),
+                    return CharacterCardWidget(
+                      response: state.characters[index],
+                      onTap: () {},
                     );
                   } else if (state.result == ResultState.error) {
                     return DefaultTryAgainWidget(
                       onPressed: _requestCharacters,
                     );
                   } else {
-                    return const SizedBox(
-                      height: 100,
-                      child: CircularProgressIndicator(),
-                    );
+                    return const DefaultLoadingWidget();
                   }
                 },
                 itemCount: state.hasReachedMax
