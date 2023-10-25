@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:estudo_rick_xp_flutter/characters/data/service/character_response.dart';
 import 'package:estudo_rick_xp_flutter/characters/domain/character_interator.dart';
+import 'package:estudo_rick_xp_flutter/shared/event_transformation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -12,7 +13,14 @@ part 'character_state.dart';
 @injectable
 class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
   CharacterBloc(this._interator) : super(const CharacterState()) {
-    on<CharacterRequestEvent>(_onCharacterRequestEvent);
+    on<CharacterRequestEvent>(
+      _onCharacterRequestEvent,
+      transformer: throttleDroppable(
+        const Duration(
+          milliseconds: 100,
+        ),
+      ),
+    );
   }
   final CharacterInterator _interator;
 
