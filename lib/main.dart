@@ -1,6 +1,8 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:estudo_rick_xp_flutter/home/presentation/page/home_page.dart';
 import 'package:estudo_rick_xp_flutter/injection.dart';
+import 'package:estudo_rick_xp_flutter/shared/theme/application_theme.dart';
+import 'package:estudo_rick_xp_flutter/shared/theme/data/app_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -23,10 +25,7 @@ class RickAndMortyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: themes[AppTheme.dark]?.themeData,
       home: const HomePage(),
     );
   }
