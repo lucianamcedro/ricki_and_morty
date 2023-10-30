@@ -5,10 +5,12 @@ class DefaultLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      height: 80,
-      width: 80,
-      child: CircularProgressIndicator(),
+    return const Center(
+      child: SizedBox(
+        height: 80,
+        width: 80,
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }

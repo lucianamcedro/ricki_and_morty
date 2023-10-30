@@ -10,20 +10,26 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:dio/dio.dart' as _i3;
 import 'package:estudo_rick_xp_flutter/characters/data/repository/character_repository.dart'
-    as _i8;
-import 'package:estudo_rick_xp_flutter/characters/data/repository/character_repository_imp.dart'
-    as _i9;
-import 'package:estudo_rick_xp_flutter/characters/data/service/character_service.dart'
-    as _i7;
-import 'package:estudo_rick_xp_flutter/characters/domain/character_interator.dart'
-    as _i10;
-import 'package:estudo_rick_xp_flutter/characters/domain/character_interator_imp.dart'
     as _i11;
-import 'package:estudo_rick_xp_flutter/characters/presentation/bloc/character_bloc.dart'
+import 'package:estudo_rick_xp_flutter/characters/data/repository/character_repository_imp.dart'
     as _i12;
-import 'package:estudo_rick_xp_flutter/network/network_module.dart' as _i13;
-import 'package:estudo_rick_xp_flutter/preferences/preferences_module.dart'
+import 'package:estudo_rick_xp_flutter/characters/data/service/character_service.dart'
+    as _i8;
+import 'package:estudo_rick_xp_flutter/characters/domain/character_interator.dart'
+    as _i13;
+import 'package:estudo_rick_xp_flutter/characters/domain/character_interator_imp.dart'
     as _i14;
+import 'package:estudo_rick_xp_flutter/characters/presentation/bloc/character_bloc.dart'
+    as _i15;
+import 'package:estudo_rick_xp_flutter/detail/data/details_repository.dart'
+    as _i9;
+import 'package:estudo_rick_xp_flutter/detail/data/service/character_details_service.dart'
+    as _i7;
+import 'package:estudo_rick_xp_flutter/detail/presentation/bloc/character_details_bloc.dart'
+    as _i10;
+import 'package:estudo_rick_xp_flutter/network/network_module.dart' as _i16;
+import 'package:estudo_rick_xp_flutter/preferences/preferences_module.dart'
+    as _i17;
 import 'package:estudo_rick_xp_flutter/shared/theme/data/app_theme_repository.dart'
     as _i5;
 import 'package:estudo_rick_xp_flutter/shared/theme/data/cubit/theme_cubit.dart'
@@ -65,17 +71,23 @@ Future<_i1.GetIt> init(
       ));
   gh.factory<_i6.ThemeCubit>(
       () => _i6.ThemeCubit(gh<_i5.AppThemeRepository>()));
-  gh.factory<_i7.CharacterService>(
-      () => _i7.CharacterServiceImp(gh<_i3.Dio>()));
-  gh.factory<_i8.CharacterRepository>(
-      () => _i9.CharacterRepositoryImp(service: gh<_i7.CharacterService>()));
-  gh.factory<_i10.CharacterInterator>(() =>
-      _i11.CharacterInteratorImp(repository: gh<_i8.CharacterRepository>()));
-  gh.factory<_i12.CharacterBloc>(
-      () => _i12.CharacterBloc(gh<_i10.CharacterInterator>()));
+  gh.factory<_i7.CharacterDetailsService>(
+      () => _i7.CharacterDetailsServiceImpl(gh<_i3.Dio>()));
+  gh.factory<_i8.CharacterService>(
+      () => _i8.CharacterServiceImp(gh<_i3.Dio>()));
+  gh.factory<_i9.DetailsRepository>(
+      () => _i9.DetailsRepositoryImpl(gh<_i7.CharacterDetailsService>()));
+  gh.factory<_i10.CharacterDetailsBloc>(
+      () => _i10.CharacterDetailsBloc(gh<_i9.DetailsRepository>()));
+  gh.factory<_i11.CharacterRepository>(
+      () => _i12.CharacterRepositoryImp(service: gh<_i8.CharacterService>()));
+  gh.factory<_i13.CharacterInterator>(() =>
+      _i14.CharacterInteratorImp(repository: gh<_i11.CharacterRepository>()));
+  gh.factory<_i15.CharacterBloc>(
+      () => _i15.CharacterBloc(gh<_i13.CharacterInterator>()));
   return getIt;
 }
 
-class _$NetworkModule extends _i13.NetworkModule {}
+class _$NetworkModule extends _i16.NetworkModule {}
 
-class _$PreferencesModule extends _i14.PreferencesModule {}
+class _$PreferencesModule extends _i17.PreferencesModule {}
