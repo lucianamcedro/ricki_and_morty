@@ -4,6 +4,7 @@ import 'package:estudo_rick_xp_flutter/shared/widgets/default_loading_widget.dar
 import 'package:estudo_rick_xp_flutter/shared/widgets/default_try_again_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class CharacterWidget extends StatefulWidget {
   const CharacterWidget({super.key});
@@ -56,11 +57,10 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                     return CharacterCardWidget(
                       response: state.characters[index],
                       onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          '/details',
-                          arguments: {
-                            'id': state.characters[index].name,
+                        context.goNamed(
+                          'details',
+                          pathParameters: {
+                            'id': state.characters[index].id.toString(),
                           },
                         );
                       },

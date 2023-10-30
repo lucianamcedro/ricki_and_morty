@@ -7,6 +7,7 @@ import 'package:estudo_rick_xp_flutter/shared/theme/data/cubit/theme_cubit.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,21 +33,34 @@ class RickAndMortyApp extends StatelessWidget {
   }
 }
 
+final GoRouter _router = GoRouter(
+  routes: <RouteBase>[
+    GoRoute(
+      path: '/',
+      name: 'home',
+      builder: (context, state) => const HomePage(),
+      routes: <RouteBase>[
+        GoRoute(
+          path: 'details/:id',
+          name: 'details',
+          builder: (context, state) => const DetailsPage(),
+        ),
+      ],
+    ),
+  ],
+);
+
 class _App extends StatelessWidget {
   const _App();
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeCubit, String>(
-      builder: (_, state) => MaterialApp(
+      builder: (_, state) => MaterialApp.router(
+        routerConfig: _router,
+        theme: ApplicationTheme.byName(state)?.themeData,
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
-        theme: ApplicationTheme.byName(state)?.themeData,
-        initialRoute: '/',
-        routes: {
-          '/': (context) => const HomePage(),
-          '/details': (context) => const DetailsPage(),
-        },
       ),
     );
   }
