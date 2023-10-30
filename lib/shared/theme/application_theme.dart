@@ -1,41 +1,37 @@
 // ignore_for_file: avoid_classes_with_only_static_members
 
 import 'package:estudo_rick_xp_flutter/shared/theme/data/app_theme.dart';
+import 'package:estudo_rick_xp_flutter/shared/theme/data/app_theme_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AppThemeModel {
-  AppThemeModel({required this.themeData, required this.theme});
-  final ThemeData themeData;
-  final AppTheme theme;
-}
-
 class ApplicationTheme {
-  static ThemeData getThemeData(AppTheme appTheme) {
-    return themes[appTheme]?.themeData ?? ThemeData.light();
-  }
-
   static AppThemeModel? byName(String themeName) {
     try {
-      return themes.values
-          .firstWhere((model) => model.theme.title == themeName);
+      return themes[AppTheme.values.byName(themeName)];
     } catch (_) {
-      return themes.values.first;
+      return themes.entries.first.value;
     }
   }
 
-  static Map<AppTheme, AppThemeModel> themes = {
+  static final themes = {
     AppTheme.light: AppThemeModel(
       theme: AppTheme.light,
       themeData: ThemeData(
         brightness: Brightness.light,
         cardTheme: const CardTheme(elevation: 4.0),
       ),
+      icon: const Icon(
+        Icons.light_mode,
+      ),
     ),
     AppTheme.dark: AppThemeModel(
       theme: AppTheme.dark,
       themeData: ThemeData(
         brightness: Brightness.dark,
+      ),
+      icon: const Icon(
+        Icons.dark_mode,
       ),
     ),
     AppTheme.halloween: AppThemeModel(
@@ -46,6 +42,9 @@ class ApplicationTheme {
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.orange,
         ),
+      ),
+      icon: const Icon(
+        Icons.forest,
       ),
     ),
     AppTheme.piano: AppThemeModel(
@@ -71,6 +70,9 @@ class ApplicationTheme {
             900: Color(0xFF000000),
           }),
         ),
+      ),
+      icon: const Icon(
+        Icons.piano,
       ),
     ),
   };

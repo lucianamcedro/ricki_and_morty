@@ -9,7 +9,7 @@ import 'package:get_it/get_it.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  configureDependencies();
+  await configureDependencies();
   runApp(
     DevicePreview(
       builder: (_) {
@@ -50,7 +50,7 @@ class _App extends StatelessWidget {
             ),
           );
         } else {
-          return const CircularProgressIndicator();
+          return const CircularProgressIndicator(); // Adicione um indicador de carregamento, se necessário
         }
       },
     );

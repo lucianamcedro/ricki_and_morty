@@ -19,15 +19,21 @@ class SettingsWidget extends StatelessWidget {
                 const SizedBox(
                   height: 32.0,
                 ),
-                ...ApplicationTheme.themes.keys.map(
+                ListTile(
+                  title: Text(
+                    'Themes',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ),
+                ...ApplicationTheme.themes.values.map(
                   (model) => RadioListTile(
-                    title: Text(model.title),
+                    title: Text(model.theme.title),
+                    secondary: model.icon,
                     value: model,
-                    groupValue: ApplicationTheme.byName(state)
-                        ?.theme, // Use model.theme em vez de model
+                    groupValue: ApplicationTheme.byName(state),
                     onChanged: (value) {
                       context.read<ThemeCubit>().changeTheme(
-                            (value as AppTheme).title,
+                            value?.theme.name ?? AppTheme.light.name,
                           );
                     },
                   ),
